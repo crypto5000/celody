@@ -4,7 +4,7 @@
 
 ## Hear an Infinite Stream
 
-[![Website Preview](https://github.com/crypto5000/celody/blob/master/img/songeditordemo1.gif "Website Preview")
+[![Website Preview](https://github.com/crypto5000/celody/img/celody.gif))
 
 **[Play Infinite Stream at Celody.com](https://celody.com)**
 
