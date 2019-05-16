@@ -316,15 +316,13 @@ If you publish to Celody.com, your stream will get an associated uuid and will b
 
 ### Publishing to the Tangle
 
-You have the option to publish your stream into the Tangle from celody.com or using IOTA's Trinity wallet. This process is just publishing your .json stream file into the data payload of an IOTA transaction. To make a data transaction, you should download the [Trinity IOTA wallet](https://trinity.iota.org/). Note you will not need any IOTA currency to publish your stream file. The IOTA protocol allows for zero-valued data transactions. 
-
-IOTA data transactions have a length limit. Even though, Celody stream files are extremely small, it's possible to compress the json object to make it even smaller. If you are publishing to the Tangle from celody.com, the stream file is actually compressed 3 different ways: 1) the file does a basic substitution of longer words for short codes; 2) the output of #1 is the compressed using the [Pako Library ](https://github.com/nodeca/pako) which is a zlib port to javascript; 3) the output of #2 is then base64 compressed using [LZ-String](http://pieroxy.net/blog/pages/lz-string/index.html) to convert to only ASCII values for the Tangle. This compression has shown to reduce the text size by over 40%.
+You have the option to publish your stream into the Tangle from celody.com or using IOTA's Trinity wallet. This process is just publishing your .json stream file into the data payload of an IOTA transaction. IOTA data transactions have a length limit. Even though, Celody stream files are extremely small, it's possible to compress the json object to make it even smaller. If you are publishing to the Tangle from celody.com, the stream file is actually compressed 3 different ways: 1) the file does a basic substitution of longer words for short codes; 2) the output of #1 is then compressed using the [Pako Library ](https://github.com/nodeca/pako) which is a zlib port to javascript; 3) the output of #2 is then base64 compressed using [LZ-String](http://pieroxy.net/blog/pages/lz-string/index.html) to convert to only ASCII values for the Tangle. This compression has shown to reduce the text size by over 40%.
 
 ![Publish Tangle](https://github.com/crypto5000/celody/blob/master/img/celodyTangle.gif "Publish Tangle")
 
 **[Publish Stream to Tangle](https://celody.com)**
 
-After you have the compressed stream text, find the data message section inside of the Trinity wallet and copy your compressed text into the field. Then send your transaction into the Tangle. The transaction should be available for view using a Tangle explorer such as [thetangle.org](https://thetangle.org)
+If you choose to not to use celody.com to make a data transaction, you should download the [Trinity IOTA wallet](https://trinity.iota.org/). Note you will not need any IOTA currency to publish your stream file. The IOTA protocol allows for zero-valued data transactions. After you have the compressed stream text, find the data message section inside of the Trinity wallet and copy your compressed text into the field. Then send your transaction into the Tangle. The transaction should be available for view using a Tangle explorer such as [thetangle.org](https://thetangle.org)
 
 You should keep track of the IOTA address that contains your stream file. You can share this address with other people and they can then listen to your stream on their site (assuming they are hosting their own version of the core code).
 
