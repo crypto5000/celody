@@ -20,7 +20,9 @@ Every stream file has editable parameters that affect the generated real-time mu
 
 A fork copies the Celody stream file from an existing stream. To fork, click on the "fork" button on the [Celody](http://celody.com) website:
 
-**[View Fork](https://github.com/crypto5000/celody/img/fork.gif)**
+![View Fork](https://github.com/crypto5000/celody/blob/master/img/fork.gif "View Fork")
+
+**[Fork Stream at Celody.com](https://celody.com)**
 
 When you fork a stream, all the sound determining parameters get copied exactly. This includes the tempo, default play speed, base unit, bars, background level, dynamics, density, variety, spread, spice and instruments. For non-sound determining parameters, forks either clear the value or create a placeholder. This includes the stream name, artist, create date, prior fork data, prior merge data, tokens, and token addresses.
 
@@ -28,7 +30,10 @@ When you fork a stream, all the sound determining parameters get copied exactly.
 
 A merge combines information from 2 streams. It takes non-conflicting instruments from Celody stream B and copies it into the file from Celody stream A. The resulting stream file is a combination of both Stream A and Stream B. In comparison to a fork, which starts as an exact sound clone of a stream file, a merge starts as a different soundscape from either of the stream parents. To merge, click on the "merge" button on the [Celody](https://celody.com) website. You will be prompted for the name of the second stream that you want to merge into the first stream:
 
-**[View Merge](https://github.com/crypto5000/celody/img/merge.gif)**
+![View Merge](https://github.com/crypto5000/celody/blob/master/img/merge.gif "View Merge")
+
+**[Merge Stream at Celody.com](https://celody.com)**
+
 
 ## Modifying a Stream File
 
@@ -303,7 +308,9 @@ The second option is completely decentralized (see the section below "Streams on
 
 If you fork, merge and then further edit the stream, you can publish your stream on the celody.com website. The process is shown below:
 
-**[View Publishing to Celody](https://github.com/crypto5000/celody/img/publishcelody.gif)**
+![Publish Stream](https://github.com/crypto5000/celody/blob/master/img/celodyPublish.gif "Publish Stream")
+
+**[Publish Stream at Celody.com](https://celody.com)**
 
 If you publish to Celody.com, your stream will get an associated uuid and will be available for others to listen at the celody.com website. Celody.com will perform a best effort to keep your stream available indefinitely.
 
@@ -313,7 +320,9 @@ You have the option to publish your stream into the Tangle from celody.com or us
 
 IOTA data transactions have a length limit. Even though, Celody stream files are extremely small, it's possible to compress the json object to make it even smaller. If you are publishing to the Tangle from celody.com, the stream file is actually compressed 3 different ways: 1) the file does a basic substitution of longer words for short codes; 2) the output of #1 is the compressed using the [Pako Library ](https://github.com/nodeca/pako) which is a zlib port to javascript; 3) the output of #2 is then base64 compressed using [LZ-String](http://pieroxy.net/blog/pages/lz-string/index.html) to convert to only ASCII values for the Tangle. This compression has shown to reduce the text size by over 40%.
 
-**[View Publishing to the Tangle](https://github.com/crypto5000/celody/img/publishtangle.gif)**
+![Publish Tangle](https://github.com/crypto5000/celody/blob/master/img/celodyTangle.gif "Publish Tangle")
+
+**[Publish Stream to Tangle](https://celody.com)**
 
 After you have the compressed stream text, find the data message section inside of the Trinity wallet and copy your compressed text into the field. Then send your transaction into the Tangle. The transaction should be available for view using a Tangle explorer such as [thetangle.org](https://thetangle.org)
 
