@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Hello World Examples">
+  <meta name="author" content="Celody">
+  <title>Hello World</title>  
+</head>
+<body>
+  
+  <div id="playStream">Play Stream</div><br>
+  <div id="stopStream">Stop Stream</div><br>
+  *IF SELF-HOSTING, YOU NEED TO REPLACE THE SOUND FILESOURCE PATHS FROM CELODY.COM/SOUNDS WITH YOUR OWN DOMAIN<br>
+  A working example of this page is at https://celody.com/helloWorld.html<br>  
+  <!-- JavaScript Dependencies -->
+  <script src="js/pizzicato.min.js"></script>
+  <script src="js/xss.js"></script>	
+  <script src="js/celodyCore.js"></script>
+  <script>
+    var exampleStreamFile = [{    
+        "streamName": "Hello World",
+        "artist": "Artist Name",                
+        "createDate": "05-23-2019",    
+        "tokens": [],
+        "tokenAddresses": [],    
+        "playSpeed": 1.0,
+        "tempo": 100,
+        "bars": 8,
+        "beatsPerBar": 4,    
+        "baseUnit": 128,
+        "backgroundLevel": 0.55,
+        "dynamics": 0.2,
+        "density": 0.6,
+        "variety": 0.3,             
+        "spread": 0.4,                    
+        "spice": 0.3,
+        "instruments": {                                                            
+            "0": [
+                {
+                    "instrument": "drum",
+                    "type": ["primary"],
+                    "color": "rgb(255,123,255)",
+                    "fileSource": ["https://celody.com/sounds/drum/kick/k12d.mp3","https://celody.com/sounds/drum/kick/k13m.mp3",],
+                    "basePhrase": [0,1,0],
+                    "baseStart": [0.0010,0.5000,0.8750],                     
+                    "volumeStart": [0.5,0.6,0.5],
+                    "fxFla": [0,0,0],                      
+                    "fxLow": [0,0,0],                      
+                    "fxAtt": [0.4,0.4,0.4],                     
+                    "fxRel": [0.5,0.5,0.5],                     
+                    "fxPan": [0.65,0.65,0.65]
+                }                            
+            ],
+            "1": [
+                {
+                    "instrument": "bell",
+                    "type": ["primary"],
+                    "color": "rgb(0,123,255)",
+                    "fileSource": ["https://celody.com/sounds/bell/a1.mp3"],                                                
+                    "basePhrase": [0,0],                                
+                    "baseStart": [0.25,0.75],                     
+                    "volumeStart": [0.5,0.6],                     
+                    "fxFla": [0.0,0.0],
+                    "fxLow": [0.4,0.4],                                
+                    "fxAtt": [0.4,0.4],                     
+                    "fxRel": [0.5,0.5],                     
+                    "fxPan": [0.4,0.4]                                                     
+                }
+            ]        
+        }
+    }];
+
+    var play = document.getElementById('playStream');
+    play.onclick = function() {
+        // stop all other streams (hides stop buttons, shows all play buttons)
+        stopStreams();
+        // load the stream
+        loadStreamFile(exampleStreamFile,0);
+        return false;        
+    };
+    var stop = document.getElementById('stopStream');
+    stop.onclick = function() {
+        // stop all other streams (hides stop buttons, shows all play buttons)
+        stopStreams();        
+        return false;        
+    };
+
+  </script>
+</body>
+
+</html>
