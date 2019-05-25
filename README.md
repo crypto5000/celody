@@ -332,7 +332,7 @@ If you are hosting the code on your own site, you can replace "celody.com" in th
 
 ### Requesting Micropayments
 
-Every stream file includes a section to micropay the artist. Payment is not required, but if you enjoy the stream, you should consider making a micropayment to the creator. Celody is also investigating using the amount and quantity of staked micropayments for a stream as a signal of its quality. So streams that have received (and still contain) the highest value of micropayments would show up higher in the search results on the celody.com website. In other words, micropayments would be 1 signal (out of many) for stream discovery. 
+Every stream file includes a section to micropay the artist. Payment is not required, but if you enjoy the stream, you should consider making a micropayment to the creator. Celody is also investigating using the amount of staked micropayments for a stream as a signal of its quality. So streams that have received (and still contain) the highest value of micropayments would show up higher in the search results on the celody.com website. In other words, micropayments would be 1 signal (out of many) for stream discovery. 
 
 ## Streams on Your Own Site/Host (p2p)
 
