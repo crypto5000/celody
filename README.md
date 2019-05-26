@@ -326,7 +326,7 @@ If you choose to not to use celody.com to make a data transaction, you should do
 
 You should keep track of the IOTA address that contains your stream file. You can share this address with other people and they can then listen to your stream on their site (assuming they are hosting their own version of the core code).
 
-NOTE: Celody.com and the core code includes a feature to listen to streams in the Tangle. If you append the parameter iota=ADDRESS to the url, where the ADDRESS is the address of your IOTA transaction, celody.com will import all streams at that address. An example would be, https://celody.com?iota=999999999999999999999999999999999999999999999999999
+NOTE: Celody.com and the core code includes a feature to listen to streams in the Tangle. If you append the parameter iota=ADDRESS to the url, where the ADDRESS is the address of your IOTA transaction, celody.com will import all streams at that address. An example would be, https://celody.com/index.html?IOTA=CELODYDEMOLUCKSPDMKGGGXAIARSRVAFGHJXDSDHWADLVBBOEHLICHTMGKVDOGRU9TBESJNHAXYPVJ9R9
 
 If you are hosting the code on your own site, you can replace "celody.com" in the code with your domain name. Data stored in the Tangle is not permanent and streams may be deleted during local snapshots.
 
