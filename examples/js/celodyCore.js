@@ -338,11 +338,11 @@ function loadStreamFile(jsonCurrent,jsonSlot) {
                 }
                 if ((instrumentContainer[celody.instrumentIndex][0].basePhrase) && (instrumentContainer[celody.instrumentIndex][0].basePhrase.length >= celody.soundIndex)) {
                     celody.fileSourceIndex = validateNumber(filterXSS(instrumentContainer[celody.instrumentIndex][0].basePhrase[celody.soundIndex]));                  
-                    if ((instrumentContainer[celody.instrumentIndex][0].fileSource) && (instrumentContainer[celody.instrumentIndex][0].fileSource.length >= celody.fileSourceIndex)) {
+                    if ((instrumentContainer[celody.instrumentIndex][0].fileSource) && (instrumentContainer[celody.instrumentIndex][0].fileSource.length > celody.fileSourceIndex)) {
                         celody.soundOptions[celody.counter].filePath = validateUrl(filterXSS(instrumentContainer[celody.instrumentIndex][0].fileSource[celody.fileSourceIndex]),celody);
                     } else {
                         celody.streamInfo[0].error = true;                           
-                        console.log("This stream file has an invalid instrument fileSource.");
+                        console.log("This stream file has an invalid instrument fileSource or basePhrase.");
                     }
                 } else {
                     celody.streamInfo[0].error = true;                       
@@ -397,7 +397,9 @@ function loadStreamFile(jsonCurrent,jsonSlot) {
                     celody.streamInfo[0].error = true;                       
                     console.log("This stream file has an invalid instrument fxPan.");
                 }                                     
-                if (celody.streamInfo[0].error) {                                                                          
+                if (celody.streamInfo[0].error) {              
+                    celody.streamInfo[0].primarySounds = 0;
+                    celody.streamInfo[0].totalSounds = 0;
                     stopStreams();
                     return false;
                 }
