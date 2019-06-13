@@ -480,6 +480,7 @@ function loadStreamFile(jsonCurrent,jsonSlot) {
     return false;
 }
 
+var celodyLoopTimer;
 function playStream(celody,loopCount) {                                                     
     celody.countIndex = 0;
     celody.countMax = 0;
@@ -639,11 +640,13 @@ function playStream(celody,loopCount) {
             if (celody.tempClone[celody.countIndex]) {celody.tempClone[celody.countIndex].stop();}                            
             celody.countIndex++;
         }
+        // clear any timeouts
+        if (celodyLoopTimer) {clearTimeout(celodyLoopTimer);}
     } else if (performance.now() - celody.masterStart > (celody.timePerLoop * 1000)) {
         // play immediately because loop has expired
         playStream(celody,loopCount);
     } else {                                  
-        setTimeout(function(){ playStream(celody,loopCount); }, (celody.timePerLoop * 1000) - (performance.now() - celody.masterStart));                                       
+        celodyLoopTimer = setTimeout(function(){ playStream(celody,loopCount); }, (celody.timePerLoop * 1000) - (performance.now() - celody.masterStart));                                       
     }
 
     return false;
@@ -663,6 +666,8 @@ function stopStreams() {
     } else {
         celody.countMax = 0;
     }        
+    // clear any timeouts
+    if (celodyLoopTimer) {clearTimeout(celodyLoopTimer);}     
     celody.countIndex = 0;            
     while (celody.countIndex < celody.countMax) {                
         if (celody.tempClone[celody.countIndex]) {celody.tempClone[celody.countIndex].stop();}                            
