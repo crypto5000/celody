@@ -1,7 +1,8 @@
 // single global container to encapsulate all celody core data
 var celody = {};           
 
-/* load the stream as a jsonObject, pass the position in object
+/* "core" module is default logic, good for generic stream with multiple instruments
+*  load the stream as a jsonObject, pass the position in object
 *  can load file as static object hardcoded into file
 *  can load file via json ajax response from remote server
 *  can load file from The Tangle using a p2p node
@@ -108,7 +109,13 @@ function loadStreamFile(jsonCurrent,jsonSlot) {
                 }
                 celody.streamInfo[0].tokenCounter++;
             }            
-        }        
+        }       
+        if (jsonCurrent[jsonSlot].module) {
+            celody.streamInfo[0].module = validateModule(filterXSS(jsonCurrent[jsonSlot].module));
+        } else {
+            // default to core if not specified
+            celody.streamInfo[0].module = "core";
+        } 
         if (jsonCurrent[jsonSlot].tempo) {
             celody.streamInfo[0].tempo = validateNumber(filterXSS(jsonCurrent[jsonSlot].tempo));
             celody.streamInfo[0].tempo = validateRange(celody.streamInfo[0].tempo,30,150,30,150);
@@ -400,7 +407,7 @@ function loadStreamFile(jsonCurrent,jsonSlot) {
                 if (celody.streamInfo[0].error) {                                                                          
                     celody.streamInfo[0].primarySounds = 0;
                     celody.streamInfo[0].totalSounds = 0;
-                    stopStreams();
+                    stopStreams();                    
                     return false;
                 }
                 celody.counter++;
@@ -450,7 +457,8 @@ function loadStreamFile(jsonCurrent,jsonSlot) {
                         if (celody.soundLoaded == celody.streamInfo[0].totalSounds) {
                             //set the background level of main sound canvas
                             Pizzicato.volume = validateRange((1 - Number(celody.streamInfo[0].backgroundLevel)),0,1,0.1,0.85);
-                            playStream(celody,0);
+                            //play using specified module
+                            playCoreStream(celody,0);
                         }
                     }
                 });                                                                          
@@ -481,7 +489,7 @@ function loadStreamFile(jsonCurrent,jsonSlot) {
 }
 
 var celodyLoopTimer;
-function playStream(celody,loopCount) {                                                     
+function playCoreStream(celody,loopCount) {                                                     
     celody.countIndex = 0;
     celody.countMax = 0;
     celody.countOffset = 0;
@@ -490,7 +498,7 @@ function playStream(celody,loopCount) {
     // set the number of sounds across the primary loop only (excludes variety sounds)
     if (celody.soundOptions) {celody.countMax = celody.streamInfo[0].primarySounds;}
     if ((!celody.soundOptions) || (!celody.streamInfo[0].primarySounds)) {                     
-        console.log("This stream has no sounds. Try reloading page or choosing a different stream.");        
+        console.log("This stream has no sounds. Try reloading page or choosing a different stream.");
         stopStreams();
         return false;
     }   
@@ -501,26 +509,26 @@ function playStream(celody,loopCount) {
     celody.playRate = celody.streamInfo[0].playSpeed;
     if (Math.random() < celody.streamInfo[0].variety) {                                
         switch(Math.floor(Math.random() * 6) + 1) {
-            case 1:                                    
-                celody.playRate = 0.5 * celody.playRate;
-                break;
-            case 2:
-                celody.playRate = 0.66 * celody.playRate;
-                break;
-            case 3:
-                celody.playRate = 0.75 * celody.playRate;
-                break;
-            case 4:
-                celody.playRate = 1.33 * celody.playRate;
-                break;
-            case 5:
-                celody.playRate = 1.5 * celody.playRate;
-                break;
-            case 6:
-                celody.playRate = 2.0 * celody.playRate;
-                break;
-            default:
-                celody.playRate = 1.0 * celody.playRate;
+                case 1:                                    
+                    celody.playRate = 0.5 * celody.playRate;
+                    break;
+                case 2:
+                    celody.playRate = 0.66 * celody.playRate;
+                    break;
+                case 3:
+                    celody.playRate = 0.75 * celody.playRate;
+                    break;
+                case 4:
+                    celody.playRate = 1.33 * celody.playRate;
+                    break;
+                case 5:
+                    celody.playRate = 1.5 * celody.playRate;
+                    break;
+                case 6:
+                    celody.playRate = 2.0 * celody.playRate;
+                    break;
+                default:
+                    celody.playRate = 1.0 * celody.playRate;
             }
     }
     // handle drums for smoother rhythm: loop is either primary, secondary or mute
@@ -533,16 +541,16 @@ function playStream(celody,loopCount) {
 
     // check for extreme loops
     if (!Number.isFinite(celody.timePerLoop)) {
-        console.log("There is a problem with this stream. Try playing a different one.");        
+        console.log("There is a problem with this stream. Try playing a different one.");
         return false;                
     } else if (celody.timePerLoop < 2) {                
-        console.log("Your tempo is too fast. Please slow it down to lengthen the loop.");        
+        console.log("Your tempo is too fast. Please slow it down to lengthen the loop.");
         return false;
     } else if (celody.timePerLoop > 1 * 60 * 60) {                
-        console.log("Your tempo is too slow. Please speed it up to shorten the loop.");        
+        console.log("Your tempo is too slow. Please speed it up to shorten the loop.");
         return false;
     }            
-    
+
     // cycle through each primary sound                
     while (celody.countIndex < celody.countMax) {                    
         // pick primary or secondary sound source
@@ -626,13 +634,12 @@ function playStream(celody,loopCount) {
         } else {
             console.log("actions took too long")                        
             break;
-        }                                                        
+        }                                        
         celody.countIndex++;
     }
 
-    // play the next loop recursively
+    // play the next loop recursively        
     loopCount++;
-
     if (celody.streamInfo[0].stop) {
         // stream has been stopped
         celody.countIndex = 0;            
@@ -644,13 +651,12 @@ function playStream(celody,loopCount) {
         if (celodyLoopTimer) {clearTimeout(celodyLoopTimer);}
     } else if (performance.now() - celody.masterStart > (celody.timePerLoop * 1000)) {
         // play immediately because loop has expired
-        playStream(celody,loopCount);
+        playCoreStream(celody,loopCount);
     } else {                                  
-        celodyLoopTimer = setTimeout(function(){ playStream(celody,loopCount); }, (celody.timePerLoop * 1000) - (performance.now() - celody.masterStart));                                       
+        celodyLoopTimer = setTimeout(function(){ playCoreStream(celody,loopCount); }, (celody.timePerLoop * 1000) - (performance.now() - celody.masterStart));                                       
     }
-
     return false;
-};
+}
 
 function stopStreams() {
     // stop all sounds and prevent any more loops                        
@@ -720,6 +726,14 @@ return inputs;
 }          
 function validateRange(input,min,max,outMin,outMax) {
     if (input >= max) {input = outMax;} else if (input <= min) {input = outMin;} 
+    return input;
+}
+function validateModule(input) {
+    if (input) { 
+      if ((input === "core") || (input === "tight") || (input === "slowdeep") || (input === "chipmunk") || (input === "nutzo") || (input === "downhill") || (input === "uphill") || (input === "seesaw")) {
+            // do nothing - module is valid
+      } else {input = "core";}
+    } else {input = "core";}
     return input;
 }
 function randomDirection(input,parameter1,parameter2) {
