@@ -48,6 +48,7 @@ Hello World Stream File:
     "tokens": ["IOTA","IOTA"],
     "tokenAddresses": ["99999999999...","ABC99999999..."],    
     "playSpeed": 1.0,
+    "module": "core",
     "tempo": 100,
     "bars": 8,
     "beatsPerBar": 4,    
@@ -123,6 +124,10 @@ The playSpeed parameter is a direct manipulation of the play rate and pitch for 
 
 Note: changing playSpeed does NOT hold pitch constant - as granular synthesis and phase-shift techniques do.
 
+### module (Type: String, Defaults to "core")
+
+The module field specifies the logic used to generate the randomness. The current modules are all found under the src folder. They are "core", "tight", "nutzo", "slowdeep", "chipmunk", "downhill", "uphill", and "seesaw". If you don't specify a module, it defaults to the core.
+
 ### tempo (Type: Number, Required, Recommended between 30 and 150)
 
 Every stream has a pulse in beats per minute called "tempo". The pulse is an equilibrium tempo that forms a backbone to the stream. A faster tempo is associated with "focus"-based music. A slower tempo is associated with "relaxation"-based music. 
@@ -150,6 +155,7 @@ Here is the Hello World Stream File with a secondary drum and secondary bell add
     "tokens": ["IOTA","IOTA"],
     "tokenAddresses": ["99999999999...","ABC99999999..."],    
     "playSpeed": 1.0,
+    "module": "core",
     "tempo": 100,
     "bars": 8,
     "beatsPerBar": 4,    
