@@ -763,7 +763,7 @@ function validateRange(input,min,max,outMin,outMax) {
 }
 function validateModule(input) {
     if (input) { 
-      if ((input === "core") || (input === "tight") || (input === "slowdeep") || (input === "chipmunk") || (input === "nutzo") || (input === "downhill") || (input === "uphill") || (input === "seesaw")) {
+      if ((input === "core") || (input === "tight") || (input === "slowdeep") || (input === "chipmunk") || (input === "nutzo") || (input === "downhill") || (input === "uphill") || (input === "seesaw") || (input === "timeofday") || (input === "weekend") || (input === "location") || (input === "speed") || (input === "airplane") || (input === "compass")) {
             // do nothing - module is valid
       } else {input = "core";}
     } else {input = "core";}
