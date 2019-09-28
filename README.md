@@ -126,7 +126,7 @@ Note: changing playSpeed does NOT hold pitch constant - as granular synthesis an
 
 ### module (Type: String, Defaults to "core")
 
-The module field specifies the logic used to generate the randomness. The current modules are all found under the src folder. They are "core", "tight", "nutzo", "slowdeep", "chipmunk", "downhill", "uphill", and "seesaw". If you don't specify a module, it defaults to the core.
+The module field specifies the logic used to generate the randomness. The current modules are all found under the src folder. They are "timeofday", "weekend", "location", "speed", "airplane", "compass", "core", "tight", "nutzo", "slowdeep", "chipmunk", "downhill", "uphill", and "seesaw". If you don't specify a module, it defaults to the core. Some modules require access to the geolocation/gps api of the device.
 
 ### tempo (Type: Number, Required, Recommended between 30 and 150)
 
