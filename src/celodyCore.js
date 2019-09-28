@@ -531,6 +531,10 @@ function playCoreStream(celody,loopCount) {
                     celody.playRate = 1.0 * celody.playRate;
             }
     }
+    // adjust the loop time by the playRate 
+    if (Number(celody.playRate) > 0) {                                
+        celody.timePerLoop = celody.timePerLoop / Number(celody.playRate);
+    }
     // handle drums for smoother rhythm: loop is either primary, secondary or mute
     celody.drumIndex = "primary";
     if (Math.random() - (0.8 * Math.random())  > celody.streamInfo[0].density) {
